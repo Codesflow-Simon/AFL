@@ -18,11 +18,12 @@ https://www.mathworks.com/help/curvefit/gaussian.html
 
 The result of this analysis will result in an average results vector $\mu_{prev}$ (length n) and a covariance matrix $\Sigma_{prev}$ (n by n). We can use this distribution to predict the performance of a team.
 
-Once the first new game happens, a new results vector will be generated $\mu_{new}$. Using assumption 4, we know this measurement was made with certainty described by $\Sigma_{new} = \Sigma_{prev}$ * c$ where $c$ is a hyperparameter. Via assumption 6, the correlation between these two distributions is given by $\Sigma_{joint} = \Sigma_{prev} \exp{(-\frac{||a, b||^2}{2 \sigma^2})}.$ Here let $a=0$ and $b=1$ (games 0 and 1 in the season) and $\sigma$ is a hyperparameter.
+Once the first new game happens, a new results vector will be generated $\mu_{new}$. Using assumption 4, we know this measurement was made with certainty described by $\Sigma_{new} = \Sigma_{prev}$ * c$ where $c$ is a hyperparameter. Via assumption 6, the correlation between these two distributions is given by $\Sigma_{joint} = \Sigma_{prev} \exp{(-\frac{||a, b||^2}{2 \sigma^2})}$.  Here let $a=0$ and $b=1$ (games 0 and 1 in the season) and $\sigma$ is a hyperparameter.
 
 We can now define a conditional distribtuion to predict the next game:
 
 $$\mu_{next} = \mu_{old} + \Sigma_{joint}   \sigma_{old}^{-1}    (\mu_{new} - \mu_{old})$$ <br>
+
 $$\Sigma_{next} = \Sigma_{new} + \Sigma_{joint}   \sigma_{old}^{-1}   \Sigma_{joint}^{T}$$
 
 In reality the distribution defined by $\mu_{next} \Sigma_{next}$ is a refined distribution to predict the output of the game that just happened.
